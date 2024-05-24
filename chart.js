@@ -1,17 +1,35 @@
-var votosCiencia = 100;
-var votosAutoAjuda = 60;
-var votosRomance = 55;
-var votosEconomia = 98;
+const listaVotos = [];
+const listaMeses = [];
+
+const areaMeses = document.getElementById('area__mes');
+const areaVotos = document.getElementById('area__votos');
+
+const registroBt = document.querySelector('.registrar__voto');
+const gerarBt = document.querySelector('.gerar__grafico');
 
 const ctx = document.getElementById('myChart');
+
+registroBt.addEventListener('click',() => {
+
+  listaMeses.push(parseInt(areaMeses.value));
+  listaVotos.push(areaVotos.value);
+
+  console.log(listaMeses)
+  console.log(listaVotos)
+
+  areaMeses.value = '';
+  areaVotos.value = '';
+});
+
+function mostrarGrafico(){
 
   new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['Ciência e Tecnologia', 'Autoajuda', 'Romance', 'Economia'],
+      labels: listaMeses,
       datasets: [{
         label: 'all of Votes',
-        data: [votosCiencia, votosAutoAjuda, votosRomance, votosEconomia],
+        data: listaVotos,
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -40,3 +58,10 @@ const ctx = document.getElementById('myChart');
       }
     }
   });
+
+}
+
+
+gerarBt.addEventListener('click',mostrarGrafico);
+
+  
